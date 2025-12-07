@@ -5,6 +5,12 @@
 #' the sum of mutations by the sum of the total_depth for a given group
 #' (mutations/bp). The operation is run using both the minimum and maximum
 #' independent mutation counting methods.
+
+# Basically, 1 row = 1 mutation, dp sum roughly equal to total number of BPs 
+# sequenced. If the same mutation in the same location hapenned in 3 different 
+# animals, it could either contribute to the # of mutations 1 time (min counting) 
+# or 3 times (max counting).
+
 #' @param mutation_data The data frame (or GRanges) to be processed containing
 #' mutation data. Required columns are listed in details.
 #' @param cols_to_group A vector of grouping variables. This should be the
