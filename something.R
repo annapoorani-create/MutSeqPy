@@ -4,30 +4,90 @@
 #' a given grouping variable. The groups may be facetted by a second variable.
 #' Mutation sums for each facet group and normalized subtype are calculated
 #' and displayed.
+
+# Creates heatmap of mutations given a certain grouping variable (these go on x or y axis, 
+# with mutation names on the other), and can facet (make new panels based on) one additional 
+# variable.
+
 #' @param mf_data A data frame containing the mutation frequency data at the
 #' desired base resolution. This is obtained using the 'calculate_mf' with
 #' subtype_resolution set to the desired resolution. cols_to_group
 #' should be the same as 'group_col'.
+
+# They use calculate mf to generate a new dataframe with which to make the heatmap. Whatever
+# variable used to group for calculate mf should be the variable being grouped for the heatmap.
+
 #' @param group_col The variable to group by.
+
+# Used for calculate mf and building the actual function as described above. :)
+
 #' @param facet_col The variable to facet by.
+
+# if you want to facet by something else...
+
 #' @param mf_type The type of mutation frequency to plot. Options are "min" or
 #' "max". (Default: "min")
+
+# Basically just asking which method people want to calculate frequency by, min or max
+
 #' @param mut_proportion_scale The scale option for the mutation proportion.
+
+# How you convert the numbers to colors - simplest is just using raw proportions,
+# could also use log to highlight small differences (below 1 gets expanded, above 
+# 1 gets compressed), etc
+
 #' Options are passed to viridis::scale_fill_viridis_c.
 #'  One of # inferno, magma, plasma, viridis, cividis, turbo, mako, or rocket.
 #' We highly reccomend the default for its ability to disciminate hard to see
 #' patterns. (Default: "turbo")
+
+# Just setting up color scheme, not technically complex...
+
 #' @param max Maximum value used for plotting the proportions.
 #' Proportions that are higher will have the maximum colour. (Default: 0.2)
+
+# Setting a max value + color so that everything higher just gets rounded down
+# to that color.
+
 #' @param rescale_data Logical value indicating whether to rescale the mutation
 #' proportions to increase the dynamic range of colors shown on the plot.
 #' (Default: TRUE)
+
+# Rescaling = scaling the numbers so they all fall into a certain range, like 1 -> 0
+# Creating this wider interval shows more colors
+
 #' @param condensed More condensed plotting format. Default = FALSE.
+
+# Literally a condensed plot, with tighter labels and axis titles and things
+
 #' @import ggplot2
+
+# seaborn
+
 #' @importFrom dplyr group_by summarise mutate rename all_of
+
+# grouping data by category, collapsing the data into summary values,
+# creating and modifying columns, rename columns, and select columns
+# by name.
+
 #' @importFrom stringr str_length str_extract str_c
+
+# Lets you play with strings, counts characters,
+# pulls patterns out of stings, and pastes strings together
+
 #' @importFrom magrittr %>%
+
+# Pipe operator to allow chaining of commands, e.g.
+# data %>%
+#   group_by(x) %>%
+#   summarise(mean_y = mean(y))
+# is the same as:
+# summarise(group_by(data, x), mean_y = mean(y))
+
 #' @return A ggplot object representing the heatmap plot.
+
+# we get back a heatmap
+
 #' @export
 #' @examples
 #' if (requireNamespace("MutSeqRData", quietly = TRUE)) {
