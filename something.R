@@ -100,6 +100,9 @@
 #' library(ExperimentHub)
 #' eh <- ExperimentHub()
 #' example_data <- eh[["EH9861"]]
+
+# Just some sample code if user wantsto see the help file
+
 #' 
 #' # define dose_group order
 #' example_data$dose_group <- factor(example_data$dose_group,
