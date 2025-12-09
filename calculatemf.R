@@ -8,7 +8,8 @@
 
 # Basically, 1 row = 1 mutation, dp sum roughly equal to total number of BPs 
 # sequenced. If the same mutation in the same location hapenned in 3 different 
-# animals, it could either contribute to the # of mutations 1 time (min counting) 
+# animals, it could either contribute to the total # of mutations in a group
+# (e.g. low dose, high dose) 1 time (min counting) 
 # or 3 times (max counting).
 
 #' @param mutation_data The data frame (or GRanges) to be processed containing
